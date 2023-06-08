@@ -20,18 +20,18 @@ resource "aws_security_group" "public" {
   vpc_id      = aws_vpc.main.id
 
   ingress {
-    description      = "SHH from home office"
-    from_port        = 22
-    to_port          = 22
-    protocol         = "tcp"
-    cidr_blocks      = ["68.228.97.89/32"]
+    description = "SHH from home office"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["68.228.97.89/32"]
   }
 
   egress {
-    from_port        = 0
-    to_port          = 0
-    protocol         = "-1"
-    cidr_blocks      = ["0.0.0.0/0"]
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   tags = {
@@ -58,18 +58,18 @@ resource "aws_security_group" "private" {
   vpc_id      = aws_vpc.main.id
 
   ingress {
-    description      = "SHH from VPC"
-    from_port        = 22
-    to_port          = 22
-    protocol         = "tcp"
-    cidr_blocks      = [var.vpc_cidr]
+    description = "SHH from VPC"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = [var.vpc_cidr]
   }
 
   egress {
-    from_port        = 0
-    to_port          = 0
-    protocol         = "-1"
-    cidr_blocks      = ["0.0.0.0/0"]
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   tags = {
@@ -78,11 +78,11 @@ resource "aws_security_group" "private" {
 }
 
 resource "aws_instance" "private" {
-  ami                         = data.aws_ami.amazonlinux.id
-  instance_type               = "t3.micro"
-  subnet_id                   = aws_subnet.private[0].id
-  vpc_security_group_ids      = [aws_security_group.private.id]
-  key_name                    = "main"
+  ami                    = data.aws_ami.amazonlinux.id
+  instance_type          = "t3.micro"
+  subnet_id              = aws_subnet.private[0].id
+  vpc_security_group_ids = [aws_security_group.private.id]
+  key_name               = "main"
 
   tags = {
     Name = "private"
