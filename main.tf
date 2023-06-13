@@ -73,6 +73,7 @@ resource "aws_route_table" "public" {
 
   tags = {
     Name = "${var.env_code}-public"
+    User = "Jane"
   }
 }
 
@@ -88,6 +89,7 @@ resource "aws_route_table" "private" {
 
   tags = {
     Name = "${var.env_code}-private${count.index}"
+    User = "Jane"
   }
 }
 
