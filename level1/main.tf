@@ -17,4 +17,12 @@ module "vpc" {
   tags = {
     Environment = var.env_code
   }
+
+  private_subnet_tags = {
+    "kubernetes.io/cluster/${var.env_code}" = "shared"
+  }
+
+  public_subnet_tags = {
+    "kubernetes.io/cluster/${var.env_code}" = "shared"
+  }
 }
